@@ -63,9 +63,13 @@ public class Main {
         return decodedWord;
     }
 
-    
+
 
     public static void main(String[] args) {
-
+        Main main = new Main();
+        Tree<String> morseTree = main.generateMorseTree();
+        String testeMorse = "... --- ...";
+        String testeResultado = main.decode(morseTree, testeMorse);
+        System.out.println(testeResultado);
     }
 }
