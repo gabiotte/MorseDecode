@@ -2,6 +2,7 @@
 public class Main {
     public Tree<String> generateMorseTree() {
         Tree<String> morseTree = new Tree<String>();
+        morseTree.add(" ");
         morseTree.add("E");
         morseTree.add("T");
         morseTree.add("I");
@@ -46,10 +47,10 @@ public class Main {
     }
 
     public String decode(Tree tree, String word) {
-        String decodedWord = "";
+        StringBuilder decodedWord = new StringBuilder();
         String[] letras = word.split(" ");
         for (String letra : letras) {
-            Node currentNode = tree.getRoot();
+            Node<String> currentNode = tree.getRoot();
             for (int i = 0; i < letra.length(); i++) {
                 Character c = letra.charAt(i);
                 if (c == '.') {
@@ -58,9 +59,9 @@ public class Main {
                     currentNode = currentNode.getRight();
                 }
             }
-            decodedWord = decodedWord + currentNode.getData();
+            decodedWord.append(currentNode.getData());
         }
-        return decodedWord;
+        return decodedWord.toString();
     }
 
 

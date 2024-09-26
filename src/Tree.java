@@ -1,40 +1,21 @@
 public class Tree<TYPE extends Comparable> {
-    private Node<TYPE> raiz;
+    private Node<TYPE> root;
 
     public Tree() {
-        this.raiz = null;
+        this.root = null;
     }
 
     public Node<TYPE> getRoot() {
-        return raiz;
-    }
-    private boolean contains(TYPE data) {
-        return containsRecursive(raiz, data);
-    }
-
-    private boolean containsRecursive(Node<TYPE> currentNode, TYPE data) {
-        if (currentNode == null) {
-            return false;
-        }
-
-        int comparison = data.compareTo(currentNode.getData());
-
-        if (comparison < 0) {
-            return containsRecursive(currentNode.getLeft(), data);
-        } else if (comparison > 0) {
-            return containsRecursive(currentNode.getRight(), data);
-        } else {
-            return true;
-        }
+        return root;
     }
 
     public void add(TYPE data) {
 
         Node<TYPE> newNode = new Node<TYPE>(data);
-        if (raiz == null) {
-            this.raiz = newNode;
+        if (root == null) {
+            this.root = newNode;
         } else {
-            Node<TYPE> currentNode = this.raiz;
+            Node<TYPE> currentNode = this.root;
             while(true) {
                 // compareTo() retorna 0 se for =, 1 se for >, e -1 se for <
                 if (newNode.getData().compareTo(currentNode.getData()) < 0) {
@@ -57,7 +38,7 @@ public class Tree<TYPE extends Comparable> {
     }
 
     public void remove(TYPE data) {
-        raiz = removeRecursive(raiz, data);
+        root = removeRecursive(root, data);
     }
 
     private Node<TYPE> removeRecursive(Node<TYPE> current, TYPE data) {
