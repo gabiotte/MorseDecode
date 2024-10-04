@@ -1,35 +1,35 @@
-public class Node<TYPE> {
-    private TYPE data;
-    private Node<TYPE> right;
-    private Node<TYPE> left;
+public class Node<T> {
+    private T data;
+    private Node<T> right;
+    private Node<T> left;
 
-    public Node(TYPE data) {
+    public Node(T data) {
         this.data = data;
         right = null;
         left = null;
     }
 
     // Getters e setters:
-    public TYPE getData() {
+    public T getData() {
         return data;
     }
-    public void setData(TYPE data) {
+    public void setData(T data) {
         this.data = data;
     }
 
-    public Node<TYPE> getLeft() {
+    public Node<T> getLeft() {
         return left;
     }
 
-    public void setLeft(Node<TYPE> left) {
+    public void setLeft(Node<T> left) {
         this.left = left;
     }
 
-    public Node<TYPE> getRight() {
+    public Node<T> getRight() {
         return right;
     }
 
-    public void setRight(Node<TYPE> right) {
+    public void setRight(Node<T> right) {
         this.right = right;
     }
 }

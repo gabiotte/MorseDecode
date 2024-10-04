@@ -1,83 +1,63 @@
-public class Tree<TYPE extends Comparable> {
-    private Node<TYPE> root;
+public class Tree<Character> {
+    private Node<Character> root;
 
     public Tree() {
-        this.root = null;
+        this.root = (Node<Character>) new Node<>(' ');
     }
 
-    public Node<TYPE> getRoot() {
+    public Node<Character> getRoot() {
         return root;
     }
 
-    public void add(TYPE data) {
-
-        Node<TYPE> newNode = new Node<TYPE>(data);
-        if (root == null) {
-            this.root = newNode;
-        } else {
-            Node<TYPE> currentNode = this.root;
-            while(true) {
-                // compareTo() retorna 0 se for =, 1 se for >, e -1 se for <
-                if (newNode.getData().compareTo(currentNode.getData()) < 0) {
-                    if (currentNode.getLeft() != null) {
-                        currentNode = currentNode.getLeft();
-                    } else {
-                        currentNode.setLeft(newNode);
-                        break;
-                    }
-                } else {
-                    if (currentNode.getRight() != null) {
-                        currentNode = currentNode.getRight();
-                    } else {
-                        currentNode.setRight(newNode);
-                        break;
-                    }
+    public void add(Character letra, String morse) {
+        char[] morseArray = morse.toCharArray();
+        Node<Character> currentNode = root;
+        for (char value : morseArray) {
+            if (value == '.') {
+                if (currentNode.getLeft() == null) {
+                    currentNode.setLeft((Node<Character>) new Node<>(' '));
                 }
+                currentNode = currentNode.getLeft();
+            } else if (value == '-') {
+                if (currentNode.getRight() == null) {
+                    currentNode.setRight((Node<Character>) new Node<>(' '));
+                }
+                currentNode = currentNode.getRight();
             }
         }
+        currentNode.setData(letra);
     }
 
-    public void remove(TYPE data) {
-        root = removeRecursive(root, data);
-    }
 
-    private Node<TYPE> removeRecursive(Node<TYPE> current, TYPE data) {
-        if (current == null) {
-            return null;
+
+    public Character decodeLetra(String letra) {
+        Node<Character> currentNode = root;
+        char[] morseArray = letra.toCharArray();
+
+        for (char symbol : morseArray) {
+            if (symbol == '.') {
+                currentNode = currentNode.getLeft();
+            } else if (symbol == '-') {
+                currentNode = currentNode.getRight();
+            }
+
+            if (currentNode == null) {
+                throw new IllegalArgumentException("Sequência Morse inválida: " + letra);
+            }
         }
 
-        int comparison = data.compareTo(current.getData());
+        return currentNode.getData();
+    }
 
-        if (comparison < 0) {
-            current.setLeft(removeRecursive(current.getLeft(), data));
-        } else if (comparison > 0) {
-            current.setRight(removeRecursive(current.getRight(), data));
-        } else {
-            // Encontrou o nó a ser removido
-
-            if (current.getLeft() == null && current.getRight() == null) {
-                return null;
-            }
-
-            if (current.getLeft() == null) {
-                return current.getRight();
-            }
-
-            if (current.getRight() == null) {
-                return current.getLeft();
-            }
-
-            Node<TYPE> smallestValueNode = findSmallestNode(current.getRight());
-            current.setData(smallestValueNode.getData());
-            current.setRight(removeRecursive(current.getRight(), smallestValueNode.getData()));
+    public String decodePalavra(String palavra) {
+        String palavraDecodificada = "";
+        String[] letras = palavra.split(" ");
+        for (String letra : letras) {
+            palavraDecodificada += decodeLetra(letra);
         }
-
-        return current;
+        return palavraDecodificada;
     }
 
-    private Node<TYPE> findSmallestNode(Node<TYPE> root) {
-        return root.getLeft() == null ? root : findSmallestNode(root.getLeft());
-    }
 
 
 }
