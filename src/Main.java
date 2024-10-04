@@ -1,3 +1,5 @@
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
     public Tree<String> generateMorseTree() {
@@ -54,8 +56,20 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         Tree<String> morseTree = main.generateMorseTree();
-        String testeMorse = "... --- ...";
-        String testeResultado = morseTree.decodePalavra(testeMorse);
-        System.out.println(testeResultado);
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Digite a frase em código morse que você deseja traduzir, com as letras separadas por espaço (0 para sair):");
+            String palavraMorse = scanner.nextLine();
+
+            if (Objects.equals(palavraMorse, "0")) {
+                break;
+            }
+
+            System.out.println("Palavra traduzida: "+ morseTree.decodePalavra(palavraMorse)+"\n\n");
+
+        }
+
     }
 }
