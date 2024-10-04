@@ -1,19 +1,19 @@
 public class Node<T> {
-    private T data;
+    private char data;
     private Node<T> right;
     private Node<T> left;
 
-    public Node(T data) {
+    public Node(char data) {
         this.data = data;
         right = null;
         left = null;
     }
 
     // Getters e setters:
-    public T getData() {
+    public char getData() {
         return data;
     }
-    public void setData(T data) {
+    public void setData(char data) {
         this.data = data;
     }
 

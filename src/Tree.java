@@ -9,7 +9,7 @@ public class Tree<Character> {
         return root;
     }
 
-    public void add(Character letra, String morse) {
+    public void add(char letra, String morse) {
         char[] morseArray = morse.toCharArray();
         Node<Character> currentNode = root;
         for (char value : morseArray) {
@@ -30,7 +30,7 @@ public class Tree<Character> {
 
 
 
-    public Character decodeLetra(String letra) {
+    public char decodeLetra(String letra) {
         Node<Character> currentNode = root;
         char[] morseArray = letra.toCharArray();
 
@@ -58,6 +58,7 @@ public class Tree<Character> {
         return palavraDecodificada;
     }
 
-
-
 }
+
+
+
